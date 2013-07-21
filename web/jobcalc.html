@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <title>JobCalc Sample HTML Entry Point</title>
+  <link rel="stylesheet" href="/css/jobcalc.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="jobcalc.js"></script>
+  <meta name="description" content="JobCalc Sample HTML Entry Point" />
+  <meta name="author" content="Paul Griffiths" />
+  <meta name="copyright" content="Copyright 2013 Paul Griffiths" />
+</head>
+
+<body>
+
+<h1>JobCalc</h1>
+
+<div class="maintable">
+<form action="/cgi-bin/jobcalc" method="POST">
+<table>
+<tr>
+  <th scope="col" colspan="2">Job Type</th>
+</tr>
+<tr>
+  <td colspan="2" class="control"><select name="jobtype" id="jobtype" onchange="changejob(this.form)">
+  		<option value="pipebend" selected="selected">Pipe Bend</option>
+  		<option value="pipestraight">Pipe Straight</option>
+	  </select></td>
+</tr>
+<tr>
+  <th scope="col" colspan="2">Pipe Attributes</th>
+</tr>
+<tr>
+  <th scope="row">Casing outside diameter (mm)</th>
+  <td><input type="text" name="casingod" size="10" value="141" /></td>
+</tr>
+<tr>
+  <th scope="row">Casing inside diameter (mm)</th>
+  <td><input type="text" name="casingid" size="10" value="128" /></td>
+</tr>
+<tr>
+  <th scope="row">Lining outside diameter (mm)</th>
+  <td><input type="text" name="liningod" size="10" value="112" /></td>
+</tr>
+<tr>
+  <th scope="row">Lining inside diameter (mm)</th>
+  <td><input type="text" name="liningid" size="10" value="100" /></td>
+</tr>
+<tr>
+  <th scope="row">Flange</th>
+  <td><select name="flange">
+  		<option value="100PN16">100PN16</option>
+  		<option value="125PN16">125PN16</option>
+  		<option value="150PN16" selected="selected">150PN16</option>
+  		<option value="200PN16">200PN16</option>
+  		<option value="250PN16">250PN16</option>
+  		<option value="300PN16">300PN16</option>
+  		<option value="400PN16">400PN16</option>
+	  </select></td>
+</tr>
+<tr class="pipebend" id="bendattr_r">
+  <th scope="col" colspan="2">Bend Attributes</th>
+</tr>
+<tr class="pipebend" id="nomrad_r">
+  <th scope="row">Nominal radius (mm)</th>
+  <td><input type="text" name="nomrad" size="10" value="500" /></td>
+</tr>
+<tr class="pipebend" id="bendangle_r">
+  <th scope="row">Bend angle (degrees)</th>
+  <td><input type="text" name="bendangle" size="10" value="60" ></td>
+</tr>
+<tr class="pipebend" id="segangle_r">
+  <th scope="row">Segment angle (degrees) </th>
+  <td><input type="text" name="segangle" size="10" value="15" /></td>
+</tr>
+<tr class="pipebend" id="casingtype_r">
+  <th scope="row">Casing type</th>
+  <td><select name="casing">
+  		<option value="onepiece">One piece</option>
+  		<option value="segmented" selected="selected">Segmented</option>
+	  </select></td>
+</tr>
+<tr class="pipebend" id="segdim_r">
+  <th scope="row" rowspan="2">Segment dimensions</th>
+  <td><input type="checkbox" name="segdim" id="drg" value="drg" checked="checked" /><label for="drg">On drawing</label></td></tr>
+<tr id="segdim2_r">
+  <td><input type="checkbox" name="segdim" id="box" value="box" /><label for="box">In box</label></td>
+</tr>
+<tr class="pipestraight" id="straightattr_r">
+  <th scope="col" colspan="2">Straight Attributes</th>
+</tr>
+<tr class="pipestraight" id="length_r">
+  <th scope="row">Straight length (mm)</th>
+  <td><input type="text" name="length" size="10" value="500" /></td>
+</tr>
+<tr>
+  <th scope="col" colspan="2">Output Options</th>
+</tr>
+<tr>
+  <th scope="row">Output</th>
+  <td><select name="output">
+  		<option value="pdf">Portable Document Format (PDF)</option>
+  		<option value="svg" selected="selected">Scalable Vector Graphics (SVG)</option>
+  		<option value="png" selected="selected">Portable Network Graphics (PNG)</option>
+	  </select></td>
+</tr>
+<tr>
+  <th scope="row">Output size</th>
+  <td><select name="outputsize">
+  		<option value="A4" selected="selected">A4</option>
+  		<option value="Letter">Letter</option>
+	  </select></td>
+</tr>
+<tr>
+  <th scope="col" colspan="2">Information options</th>
+</tr>
+<tr>
+  <th scope="row">Title</th>
+  <td><input type="text" name="title" size=40 value="Alumina lined pipe bend, 100mm nominal bore" /></td>
+</tr>
+<tr>
+  <th scope="row">Customer</th>
+  <td><input type="text" name="customer" size=20 value="" /></td>
+</tr>
+<tr>
+  <th scope="row">Project no.</th>
+  <td><input type="text" name="projno" size=10 value="P001" /></td>
+</tr>
+<tr>
+  <th scope="row">Drawing no.</th>
+  <td><input type="text" name="drgno" size=10 value="DRG001" /></td>
+</tr>
+<tr>
+  <th scope="row">Checked by</th>
+  <td><input type="text" name="checkedby" size=10 value="MG" /></td>
+</tr>
+<tr>
+  <th scope="row">Quantity</th>
+  <td><input type="text" name="qty" size=10 value="7" /></td>
+</tr>
+<tr>
+  <th scope="row">Material</th>
+  <td><input type="text" name="material" size=20 value="Alumina" /></td>
+</tr>
+<tr>
+  <th scope="row">Bonding system</th>
+  <td><input type="text" name="bonding" size=20 value="Cement" /></td>
+</tr>
+<tr>
+  <th scope="row">Finish</th>
+  <td><input type="text" name="finish" size=20 value="Self colour" /></td>
+</tr>
+<tr>
+  <th scope="row">Service temperature</th>
+  <td><input type="text" name="servicetemp" size=10 value="1,200C" /></td>
+</tr>
+<tr>
+  <td colspan="2" class="control"><input type="submit" value="Generate Drawing" /></td>
+</tr>
+</table>
+</form>
+</div>
+
+</body>
+</html>
+
